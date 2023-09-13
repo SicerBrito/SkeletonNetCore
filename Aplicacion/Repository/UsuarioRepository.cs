@@ -13,6 +13,16 @@ public class UsuarioRepository : GenericRepository<Usuario>, IUsuario
         _Context = context;
     }
 
+    public Task Find()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task FindByTypeIdCapitalizeId(string id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Usuario> GetByUsernameAsync(string username)
     {
         return (await _Context.Set<Usuario>()
