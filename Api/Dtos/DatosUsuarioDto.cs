@@ -1,4 +1,4 @@
-namespace Api.Dtos;
+namespace API.Dtos;
     public class DatosUsuarioDto{
         public string ? Mensaje { get; set; }
         public bool EstaAutenticado { get; set; }

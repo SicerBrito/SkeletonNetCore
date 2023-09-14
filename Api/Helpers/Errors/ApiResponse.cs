@@ -1,4 +1,4 @@
-namespace Api.Helpers.Errors;
+namespace API.Helpers.Errors;
     public class ApiResponse{
 
         public int StatusCode { get; set; }

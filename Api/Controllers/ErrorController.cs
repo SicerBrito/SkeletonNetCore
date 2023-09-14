@@ -1,7 +1,7 @@
-using Api.Helpers.Errors;
+using API.Helpers.Errors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace API.Controllers;
 
     [Route("errors/{code}")]
     public class ErrorController : BaseApiController{

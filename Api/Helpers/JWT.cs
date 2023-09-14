@@ -1,4 +1,4 @@
-namespace Api.Helpers;
+namespace API.Helpers;
     public class JWT{
 
         public string ? Key { get; set; }

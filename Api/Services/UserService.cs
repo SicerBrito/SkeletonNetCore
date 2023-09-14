@@ -1,8 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Api.Dtos;
-using Api.Helpers;
+using API.Dtos;
+using API.Helpers;
 using Dominio.Entities;
 using Dominio.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 
-namespace Api.Services;
+namespace API.Services;
 public class UserService : IUserService{
         private readonly JWT _jwt;
         private readonly IUnitOfWork _unitOfWork;

@@ -1,4 +1,4 @@
-namespace Api.Helpers;
+namespace API.Helpers;
     public class Autorizacion{
         
         public enum Roles{

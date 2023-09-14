@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Api.Helpers;
+namespace API.Helpers;
     public class GlobalVerbRoleHandler : AuthorizationHandler<GlobalVerbRoleRequirement>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;

@@ -1,6 +1,6 @@
-using Api.Dtos;
+using API.Dtos;
 
-namespace Api.Services;
+namespace API.Services;
     public interface IUserService{
 
         Task<string> RegisterAsync(RegisterDto model);

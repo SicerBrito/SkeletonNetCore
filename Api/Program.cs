@@ -1,11 +1,25 @@
 using System.Reflection;
-using Api.Extensions;
+using API.Extensions;
+using API.Helpers;
+using API.Helpers.Errors;
 using AspNetCoreRateLimit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Persistencia.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// var logger = new LoggerConfiguration()
+//                     .ReadFrom.Configuration(builder.Configuration)
+//                     .Enrich.FromLogContext()
+//                     .CreateLogger();
+
+// //builder.Logging.ClearProviders();
+// builder.Logging.AddSerilog(logger);
+// /*
+//  el context accessor nos permite que podamos implementar la autorizacion de roles
+// */
+// builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 
 builder.Services.AddControllers( options =>
@@ -15,12 +29,20 @@ builder.Services.AddControllers( options =>
 
 }).AddXmlSerializerFormatters();
 
-// builder.Services.ConfigureCors(); //configuracion de las cors
-// builder.Services.AddAplicacionServices(); //configuracion de la UnitOfWork(repo-interface) y otras cosas mas
+builder.Services.ConfigureCors(); //configuracion de las cors
+builder.Services.AddAplicacionServices(); //configuracion de la UnitOfWork(repo-interface) y otras cosas mas
 // builder.Services.AddJwt(builder.Configuration); //definir los parametros del JWT para añadir 
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly()); //habilitar el AutoMapper
-// builder.Services.ConfigureRateLimiting();//habilitar la configuracion del numero de peticiones 
-// builder.Services.ConfigureApiVersioning(); //habilitar las versiones o versionado en el proyecto para las Apis 
+builder.Services.ConfigureRateLimiting();//habilitar la configuracion del numero de peticiones 
+builder.Services.ConfigureApiVersioning(); //habilitar las versiones o versionado en el proyecto para las Apis
+
+
+builder.Services.AddAuthorization(opts =>{
+    opts.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .AddRequirements(new GlobalVerbRoleRequirement())
+        .Build();
+});
 
 //habilitamos la conexion a la base de datos 
 builder.Services.AddDbContext<SicerContext>(options =>
@@ -34,6 +56,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

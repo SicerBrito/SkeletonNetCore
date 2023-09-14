@@ -1,4 +1,4 @@
-namespace Api.Helpers.Errors;
+namespace API.Helpers.Errors;
     public class ApiValidation : ApiResponse{
         public ApiValidation() : base(400)
         {

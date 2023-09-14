@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace Api.Helpers;
+namespace API.Helpers;
     public class GlobalVerbRoleRequirement : IAuthorizationRequirement{
         public bool IsAllowed(string role, string verb)
         {
