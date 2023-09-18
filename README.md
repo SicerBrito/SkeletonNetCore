@@ -14,3 +14,4 @@ puTTy
 Remoto
 
 dotnet new webapi --framework net7.0 -O WebAPITiendaV
+(WebAPITiendaV es el nombre que se le propocionara a la carpeta o proyecto WEBAPI)
